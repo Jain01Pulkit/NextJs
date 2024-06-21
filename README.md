@@ -37,6 +37,30 @@ A layout is UI that is shared between multiple pages in the app.
 You can define a layout by default exporting a React component from a layout.tsx file.
 That component should accept a children prop that will be populated with a child page during rendering.
 In a freshly next app page.tsx will replace the children prop in the layout file.
+## Routing Metatdata
+- Ensuring proper SEO is crucial, so nextjs has metadata API which allows you to define metadata for each page.
+- Configuring MetaData: Export a static `metadata  object`(case Sensitive) or export a dynamic `generateMetadata function`
+**NOTE- Both layout and page files can export metadata. If defined in a layout, it applies to all pages in that layout, but if defined in a page, it appies only to that page. Page metadata will replace layout metadata if they have same properties and when there is metadata in multiple places for the same route, they get combined**
+## Title Metadata
+- Title field in metadata has 3 object fields :
+- `absolute` - this works if u want to completely ignore the title set in the `title.template`
+- `default` - this works for every child components if they don't have the title defined.
+- `template` - this appends the child components title with the defined in the parent page.
+
+## Link Component
+- This as in react helps us to move to other components with the help of href prop.
+- There is a replace prop which helps us to move to the homepage instead of the last visited route. 
+- To naviagte to another route, use `useRouter()` hook from `next/navigation` by using the push method inside it.
+
+## Templates
+- Templates are similar to layouts in that they wrap each child layout or page.
+- But with templates when a user navigates between routes that share a template  a new instance of the comonent is mounted. DOM elements are recreated, state is not preserved and effects are re-synchronized.
+- A Template can be defined by exporting a default React component from a template.tsx file.
+- Similar to layouts, templates also should accept a children prop which will render the nested segments in the route.
+
+## Loading
+- With Loading file you can display the loading state as soon as user navigates to a new route.
+- For this , just add a file named loading.tsx in the designated folder where you want the loading to show. Loading will work for all page.tsx and its nested childrens.
 ## Getting Started
 
 First, run the development server:
